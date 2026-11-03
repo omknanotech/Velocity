@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="900" viewBox="0 0 1440 900">
+  <defs>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#7fe4b8"/><stop offset="1" stop-color="#ff9f43"/></linearGradient>
+    <linearGradient id="ring" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#7fe4b8"/><stop offset="1" stop-color="#ff9f43"/></linearGradient>
+  </defs>
+  <rect width="1440" height="900" fill="#0b0d14"/>
+  <rect x="22" y="22" width="1396" height="856" rx="28" fill="#101622" stroke="#293244"/>
+  <rect x="22" y="22" width="244" height="856" rx="28" fill="#111722"/>
+  <path d="M266 22v856" stroke="#293244"/>
+  <rect x="48" y="48" width="36" height="36" rx="12" fill="#46372b"/><path d="m68 54-12 17h8l-1 12 13-18h-8l1-11z" fill="#ffd2a1"/>
+  <text x="96" y="75" fill="#f2f4ff" font-family="Inter,Segoe UI,sans-serif" font-size="25" font-weight="700">Velocity</text>
+  <text x="52" y="135" fill="#8490a6" font-family="Inter,Segoe UI,sans-serif" font-size="12" letter-spacing="2">MAIN</text>
+  <rect x="42" y="153" width="204" height="48" rx="14" fill="#1b2731" stroke="#31423e"/><rect x="42" y="163" width="4" height="28" rx="2" fill="url(#accent)"/>
+  <g fill="#dfe7f4" font-family="Inter,Segoe UI,sans-serif" font-size="16"><text x="65" y="183">Overview</text><text x="65" y="237">Projects</text><text x="65" y="291">Calendar</text><text x="65" y="345">AI Insights</text></g>
+  <text x="52" y="407" fill="#8490a6" font-family="Inter,Segoe UI,sans-serif" font-size="12" letter-spacing="2">TOOLS</text>
+  <g fill="#dfe7f4" font-family="Inter,Segoe UI,sans-serif" font-size="16"><text x="65" y="455">Time Tracker</text><text x="65" y="509">Analytics</text><text x="65" y="578">Friends leaderboard</text></g>
+  <rect x="42" y="770" width="204" height="46" rx="13" fill="#171f2d" stroke="#2b3445"/><text x="72" y="799" fill="#dfe7f4" font-family="Inter,Segoe UI,sans-serif" font-size="14">Export data</text>
+  <rect x="294" y="42" width="646" height="46" rx="15" fill="#151c28" stroke="#2b3445"/><text x="318" y="71" fill="#8490a6" font-family="Inter,Segoe UI,sans-serif" font-size="15">Search tasks or projects</text>
+  <rect x="1178" y="42" width="168" height="46" rx="15" fill="#7565e8"/><text x="1202" y="71" fill="#fff" font-family="Inter,Segoe UI,sans-serif" font-size="14" font-weight="600">+ New Project</text>
+  <text x="294" y="147" fill="#f4f6ff" font-family="Inter,Segoe UI,sans-serif" font-size="36" font-weight="700">Welcome back, Alex</text>
+  <text x="294" y="179" fill="#929bb0" font-family="Inter,Segoe UI,sans-serif" font-size="16">Here's your weekly overview</text>
+  <g font-family="Inter,Segoe UI,sans-serif">
+    <rect x="294" y="208" width="263" height="102" rx="19" fill="#171e2b" stroke="#2a3445"/><rect x="570" y="208" width="263" height="102" rx="19" fill="#171e2b" stroke="#2a3445"/><rect x="846" y="208" width="263" height="102" rx="19" fill="#171e2b" stroke="#2a3445"/><rect x="1122" y="208" width="263" height="102" rx="19" fill="#171e2b" stroke="#2a3445"/>
+    <g fill="#f0f3ff" font-size="27" font-weight="700"><text x="322" y="260">3</text><text x="598" y="260">2</text><text x="874" y="260">11.5h</text><text x="1150" y="260">7 days</text></g>
+    <g fill="#929bb0" font-size="11" letter-spacing="1"><text x="322" y="286">PROJECTS</text><text x="598" y="286">COMPLETED</text><text x="874" y="286">FOCUS HOURS</text><text x="1150" y="286">STREAK</text></g>
+  </g>
+  <rect x="294" y="330" width="533" height="240" rx="22" fill="#171e2b" stroke="#2a3445"/><rect x="844" y="330" width="541" height="240" rx="22" fill="#171e2b" stroke="#2a3445"/>
+  <text x="322" y="369" fill="#7fe4b8" font-family="Inter,Segoe UI,sans-serif" font-size="12" letter-spacing="1.5">DAILY MOMENTUM</text><text x="322" y="399" fill="#f0f3ff" font-family="Inter,Segoe UI,sans-serif" font-size="20" font-weight="600">Today at a glance</text>
+  <circle cx="420" cy="480" r="49" fill="none" stroke="#293244" stroke-width="9"/><circle cx="420" cy="480" r="49" fill="none" stroke="url(#ring)" stroke-width="9" stroke-linecap="round" stroke-dasharray="250 308" transform="rotate(-90 420 480)"/>
+  <text x="420" y="487" text-anchor="middle" fill="#f4f6ff" font-family="Inter,Segoe UI,sans-serif" font-size="23" font-weight="700">81%</text>
+  <text x="498" y="462" fill="#929bb0" font-family="Inter,Segoe UI,sans-serif" font-size="13">FOCUSED TODAY</text><text x="498" y="497" fill="#f4f6ff" font-family="Inter,Segoe UI,sans-serif" font-size="25" font-weight="700">1h 38m</text><text x="498" y="523" fill="#929bb0" font-family="Inter,Segoe UI,sans-serif" font-size="13">22m to your 2h goal</text>
+  <text x="872" y="369" fill="#7fe4b8" font-family="Inter,Segoe UI,sans-serif" font-size="12" letter-spacing="1.5">SMALL WINS, REAL MOMENTUM</text><text x="872" y="399" fill="#f0f3ff" font-family="Inter,Segoe UI,sans-serif" font-size="20" font-weight="600">Daily habits</text>
+  <rect x="872" y="420" width="488" height="5" rx="3" fill="#2a3445"/><rect x="872" y="420" width="312" height="5" rx="3" fill="#7fe4b8"/>
+  <g font-family="Inter,Segoe UI,sans-serif" font-size="14"><text x="904" y="458" fill="#dfe7f4">✓  Plan the day</text><text x="904" y="497" fill="#dfe7f4">□  Move for 20 minutes</text><text x="904" y="536" fill="#dfe7f4">□  Read for 10 minutes</text></g>
+  <rect x="294" y="590" width="533" height="246" rx="22" fill="#171e2b" stroke="#2a3445"/><rect x="844" y="590" width="541" height="246" rx="22" fill="#171e2b" stroke="#2a3445"/>
+  <text x="322" y="632" fill="#929bb0" font-family="Inter,Segoe UI,sans-serif" font-size="12" letter-spacing="1.5">BALANCE</text><text x="322" y="661" fill="#f0f3ff" font-family="Inter,Segoe UI,sans-serif" font-size="20" font-weight="600">This week</text>
+  <circle cx="560" cy="729" r="57" fill="none" stroke="#7fe4b8" stroke-width="17"/><circle cx="560" cy="729" r="57" fill="none" stroke="#8c7cff" stroke-width="17" stroke-dasharray="125 358" transform="rotate(-90 560 729)"/><text x="560" y="735" text-anchor="middle" fill="#fff" font-family="Inter,Segoe UI,sans-serif" font-size="19" font-weight="700">65%</text>
+  <text x="872" y="632" fill="#929bb0" font-family="Inter,Segoe UI,sans-serif" font-size="12" letter-spacing="1.5">FOCUS</text><text x="872" y="661" fill="#f0f3ff" font-family="Inter,Segoe UI,sans-serif" font-size="20" font-weight="600">Productivity trends</text>
+  <g fill="#8c7cff"><rect x="904" y="744" width="36" height="54" rx="12"/><rect x="970" y="711" width="36" height="87" rx="12"/><rect x="1036" y="728" width="36" height="70" rx="12"/><rect x="1102" y="680" width="36" height="118" rx="12"/><rect x="1168" y="718" width="36" height="80" rx="12"/><rect x="1234" y="667" width="36" height="131" rx="12"/><rect x="1300" y="735" width="36" height="63" rx="12"/></g>
+</svg>

@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0B0D14" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="Velocity" />
+    <title>Velocity</title>
+    <meta name="description" content="Velocity productivity tracker dashboard" />
+    <link rel="manifest" href="manifest.json" />
+    <link rel="icon" type="image/png" href="icon-192.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="page-glow glow-one"></div>
+    <div class="page-glow glow-two"></div>
+
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="Sidebar navigation">
+        <div class="logo-block">
+          <div class="logo-mark" aria-hidden="true">
+            <svg class="logo-bolt" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M14 1 4 13h6l-1 10L20 9h-6l1-8Z" fill="url(#velocityBolt)" />
+              <defs>
+                <linearGradient id="velocityBolt" x1="5" y1="2" x2="19" y2="22" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#fff" />
+                  <stop offset="1" stop-color="#ffbf7c" />
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+          <span class="logo-name">Velocity</span>
+        </div>
+
+        <div class="nav-section">
+          <div class="nav-label">MAIN</div>
+          <button class="nav-item active" type="button" data-view="overview">
+            <span class="nav-icon">◉</span>
+            <span>Overview</span>
+          </button>
+          <button class="nav-item" type="button" data-view="projects">
+            <span class="nav-icon">▣</span>
+            <span>Projects</span>
+          </button>
+          <button class="nav-item" type="button" data-view="calendar">
+            <span class="nav-icon">◫</span>
+            <span>Calendar</span>
+          </button>
+          <button class="nav-item" type="button" data-view="insights">
+            <span class="nav-icon">✦</span>
+            <span>AI Insights</span>
+          </button>
+        </div>
+
+        <div class="nav-section">
+          <div class="nav-label">TOOLS</div>
+          <button class="nav-item" type="button" data-view="timer">
+            <span class="nav-icon">◔</span>
+            <span>Time Tracker</span>
+          </button>
+          <button class="nav-item" type="button" data-view="analytics">
+            <span class="nav-icon">◌</span>
+            <span>Analytics</span>
+          </button>
+        </div>
+
+        <button class="nav-item leaderboard-item" type="button" data-view="leaderboard">
+          <span class="nav-icon">🏆</span>
+          <span>Leaderboard</span>
+        </button>
+
+        <div class="sidebar-footer">
+          <button class="secondary-action" id="exportDataBtn" type="button">Export data</button>
+          <button class="secondary-action" id="importDataBtn" type="button">Import</button>
+          <button class="secondary-action danger" id="resetDemoBtn" type="button">Reset demo</button>
+          <input id="importDataInput" type="file" accept="application/json" hidden />
+          <button class="logout-button" type="button">Logout</button>
+        </div>
+      </aside>
+
+      <main class="main-panel">
+        <header class="topbar">
+          <label class="searchbox" aria-label="Search tasks or projects">
+            <span class="search-icon">⌕</span>
+            <input id="globalSearch" type="search" placeholder="Search or type a command" />
+            <span class="shortcut-badge">Ctrl/Cmd + F</span>
+          </label>
+
+          <div class="topbar-actions">
+            <button class="new-project-btn" id="openProjectModal" type="button">+ New Project</button>
+            <button class="icon-button" type="button" aria-label="Notifications">
+              🔔
+              <span class="notify-dot"></span>
+            </button>
+            <button class="avatar-button" type="button" aria-label="User profile">V</button>
+          </div>
+        </header>
+
+        <section class="page active" data-page="overview">
+          <div class="overview-head">
+            <div>
+              <h1 id="greetingText">Welcome back</h1>
+              <p>Here's your weekly overview</p>
+            </div>
+          </div>
+
+          <div class="stats-grid" id="statCards"></div>
+
+          <div class="daily-overview-grid">
+            <section class="panel daily-summary-panel">
+              <div class="card-header-row">
+                <div><div class="card-kicker">Daily momentum</div><h2>Today at a glance</h2></div>
+                <span class="today-date" id="todayDateLabel"></span>
+              </div>
+              <div class="daily-summary-main">
+                <div class="daily-ring-wrap">
+                  <svg id="dailyFocusRing" viewBox="0 0 100 100" role="img" aria-label="Daily focus goal progress">
+                    <defs>
+                      <linearGradient id="dailyFocusGradient" x1="0" y1="0" x2="1" y2="1">
+                        <stop stop-color="#7fe4b8" />
+                        <stop offset="1" stop-color="#ff9f43" />
+                      </linearGradient>
+                    </defs>
+                    <circle class="daily-ring-track" cx="50" cy="50" r="42"></circle>
+                    <circle class="daily-ring-progress" id="dailyFocusRingProgress" cx="50" cy="50" r="42"></circle>
+                  </svg>
+                  <div class="daily-ring-label"><strong id="dailyFocusPercent">0%</strong><span>of focus goal</span></div>
+                </div>
+                <div class="daily-focus-copy">
+                  <span class="card-kicker">Focused today</span>
+                  <strong id="todayFocusTime">0m</strong>
+                  <span id="todayFocusTarget">2h daily goal</span>
+                </div>
+              </div>
+              <div class="daily-summary-footer">
+                <div><span>Tasks due today</span><strong id="todayTaskCount">0 / 0</strong></div>
+                <div><span>Habits complete</span><strong id="todayHabitCount">0 / 3</strong></div>
+              </div>
+            </section>
+
+            <section class="panel habit-panel">
+              <div class="card-header-row">
+                <div><div class="card-kicker">Small wins, real momentum</div><h2>Daily habits</h2></div>
+                <span class="streak-badge"><span aria-hidden="true">✦</span><strong id="habitStreakValue">0</strong><span>day streak</span></span>
+              </div>
+              <div class="habit-xp-row">
+                <span class="level-badge" id="habitLevelLabel">LEVEL 1</span>
+                <strong id="habitXpLabel">0 / 250 XP</strong>
+              </div>
+              <div class="habit-xp-track" role="progressbar" aria-label="Progress to next level" aria-valuemin="0" aria-valuemax="250" aria-valuenow="0">
+                <span id="habitXpProgress"></span>
+              </div>
+              <div class="habit-list" id="habitList"></div>
+            </section>
+          </div>
+
+          <div class="content-grid">
+            <div class="panel balance-card">
+              <div class="card-header-row">
+                <div>
+                  <div class="card-kicker">Balance</div>
+                  <h2>This week</h2>
+                </div>
+                <button class="ghost-btn" type="button">View details</button>
+              </div>
+              <div class="balance-wrap">
+                <svg id="balanceDonut" viewBox="0 0 180 180" aria-label="Work life balance chart"></svg>
+                <div class="balance-center">
+                  <strong id="balanceLabel">Balance</strong>
+                  <span>This week</span>
+                </div>
+              </div>
+              <div class="legend-row">
+                <div class="legend-item"><span class="legend-dot light"></span> Work 65%</div>
+                <div class="legend-item"><span class="legend-dot dark"></span> Life 35%</div>
+              </div>
+            </div>
+
+            <div class="panel productivity-card">
+              <div class="card-header-row">
+                <div>
+                  <div class="card-kicker">Focus</div>
+                  <h2>Productivity Trends</h2>
+                </div>
+                <div class="mini-badge success">+12% vs last week</div>
+              </div>
+              <div class="chart-summary-row">
+                <div class="chart-summary-copy">
+                  <strong id="weeklyHoursLogged">18h logged this week</strong>
+                </div>
+              </div>
+              <div id="trendBars" class="trend-bars" aria-label="Productivity trend bars"></div>
+            </div>
+          </div>
+
+        </section>
+
+        <section class="page" data-page="projects">
+          <div class="page-heading">
+            <div><span class="card-kicker">Workspace</span><h1>Projects</h1></div>
+          </div>
+          <div id="projectGrid" class="project-grid"></div>
+          <div class="panel task-panel project-task-panel">
+            <div class="card-header-row">
+              <div><div class="card-kicker">Tasks</div><h2>Task Manager</h2></div>
+              <div class="task-filters" id="taskFilters">
+                <button class="filter-btn active" data-filter="all" type="button">All</button>
+                <button class="filter-btn" data-filter="today" type="button">Today</button>
+                <button class="filter-btn" data-filter="completed" type="button">Completed</button>
+              </div>
+            </div>
+            <form id="taskForm" class="task-form">
+              <input id="taskInput" type="text" placeholder="Add a task" aria-label="New task title" />
+              <button type="submit" class="primary-btn">Add</button>
+            </form>
+            <div id="taskList" class="task-list"></div>
+          </div>
+        </section>
+
+        <section class="page" data-page="calendar">
+          <div class="page-heading">
+            <div><span class="card-kicker">Plan your week</span><h1>Calendar</h1></div>
+            <div class="calendar-week-controls">
+              <button class="mini-arrow" id="calendarPrevWeek" type="button" aria-label="Previous week">←</button>
+              <strong id="calendarWeekLabel"></strong>
+              <button class="mini-arrow" id="calendarNextWeek" type="button" aria-label="Next week">→</button>
+            </div>
+          </div>
+          <div class="panel calendar-panel">
+            <div id="calendarDays" class="calendar-days" aria-label="Days of the week"></div>
+            <div class="calendar-agenda-heading">
+              <div><span class="card-kicker">Selected day</span><h2 id="calendarSelectedLabel"></h2></div>
+              <span class="mini-badge success" id="calendarEventCount">0 items</span>
+            </div>
+            <div id="calendarEvents" class="calendar-events"></div>
+          </div>
+        </section>
+
+        <section class="page" data-page="insights">
+          <div class="page-heading">
+            <div><span class="card-kicker">Personalized guidance</span><h1>AI Insights</h1></div>
+          </div>
+          <div class="panel ai-card insights-panel">
+            <div class="card-header-row ai-head">
+              <div class="ai-pill"><span>✦</span> Focus suggestions</div>
+              <div class="dot-nav" aria-label="Insight navigation">
+                <span class="dot active"></span><span class="dot"></span><span class="dot"></span>
+              </div>
+            </div>
+            <div id="aiInsight" class="ai-insight-box"></div>
+          </div>
+        </section>
+
+        <section class="page" data-page="timer">
+          <div class="page-heading">
+            <div><span class="card-kicker">Stay in flow</span><h1>Time Tracker</h1></div>
+          </div>
+          <div class="panel timer-card timer-page-card">
+            <div class="card-header-row">
+              <div><div class="card-kicker">Tracker</div><h2>Focus session</h2></div>
+              <button class="ghost-btn" type="button">Pomodoro</button>
+            </div>
+            <div class="timer-controls-row">
+              <button class="timer-control dark" id="timerPauseBtn" type="button">Pause</button>
+              <button class="timer-control orange" id="timerStopBtn" type="button">Stop</button>
+            </div>
+            <div class="timer-showcase">
+              <svg id="timerGauge" viewBox="0 0 220 120" aria-label="Focus timer gauge"></svg>
+              <div class="timer-center"><span id="timerDisplay">00:00</span></div>
+            </div>
+            <div class="task-select-row">
+              <label class="select-wrap"><span>Task</span><select id="activeTaskSelect" aria-label="Select active task"></select></label>
+              <label class="select-wrap small"><span>Project</span><select id="activeProjectSelect" aria-label="Select active project"></select></label>
+            </div>
+            <div class="timer-actions-row">
+              <button class="primary-btn compact" id="timerStartBtn" type="button">Start</button>
+              <button class="primary-btn compact secondary" id="timerResumeBtn" type="button">Resume</button>
+              <button class="primary-btn compact orange" id="timerStopActionBtn" type="button">Stop</button>
+            </div>
+          </div>
+        </section>
+
+        <section class="page" data-page="analytics">
+          <div class="analytics-layout">
+            <div class="panel analytics-card wide-card">
+              <div class="card-header-row analytics-header">
+                <div class="analytics-title-wrap">
+                  <span class="card-kicker accent-green">Your Activity</span>
+                  <h2>Contribution heatmap</h2>
+                </div>
+                <button class="ghost-btn green" type="button">View All</button>
+              </div>
+              <div id="heatmapChart" class="heatmap-chart"></div>
+              <div class="heatmap-footer">
+                <div class="heatmap-meta">
+                  <div class="stat-mini">
+                    <span>Total Count</span>
+                    <strong id="totalCountValue">1,284</strong>
+                    <em class="mini-badge success">+12%</em>
+                  </div>
+                  <div class="stat-mini">
+                    <span>Current Streak</span>
+                    <strong id="currentStreakValue">12 days</strong>
+                    <small>Longest streak 38d</small>
+                  </div>
+                  <div class="stat-mini">
+                    <span>Peak Day</span>
+                    <strong id="peakDayValue">Tuesday</strong>
+                    <small>18 activities recorded</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="panel analytics-card">
+              <div class="card-header-row analytics-header">
+                <span class="card-kicker accent-green">Task Activity</span>
+                <div class="year-select">Year • 2026</div>
+              </div>
+              <div class="chart-headline">
+                <span class="chart-label">TASK COMPLETED</span>
+                <div class="line-stat-row">
+                  <strong id="taskCompletedValue">1,345</strong>
+                  <span class="mini-badge success">+5.2%</span>
+                </div>
+              </div>
+              <div id="taskActivityChart" class="svg-chart"></div>
+            </div>
+
+            <div class="panel analytics-card">
+              <div class="card-header-row analytics-header">
+                <span class="card-kicker accent-green">Time Team Allocation</span>
+                <button class="ghost-btn green" type="button">June 2026</button>
+              </div>
+              <div id="radarChart" class="svg-chart radar-wrap"></div>
+            </div>
+
+            <div class="panel analytics-card">
+              <div class="card-header-row analytics-header">
+                <span class="card-kicker accent-green">Productivity Overview</span>
+                <button class="ghost-btn green" type="button">June 2026</button>
+              </div>
+              <div class="overview-metrics">
+                <div class="metric-block">
+                  <span>Total Hours</span>
+                  <strong>128h</strong>
+                  <em class="mini-badge success">+18%</em>
+                </div>
+                <div class="metric-block">
+                  <span>Task Completed</span>
+                  <strong>342</strong>
+                  <em class="mini-badge success">+12%</em>
+                </div>
+                <div class="metric-block">
+                  <span>Daily Average</span>
+                  <strong>5.3</strong>
+                  <em class="mini-badge danger">-0.2h</em>
+                </div>
+              </div>
+              <div id="productivityBars" class="productivity-bars"></div>
+            </div>
+
+            <div class="panel analytics-card">
+              <div class="card-header-row analytics-header">
+                <div class="analytics-title-wrap">
+                  <span class="card-kicker accent-green">Team Progress</span>
+                  <h2>Overall team performance</h2>
+                </div>
+                <button class="ghost-btn green" type="button">View Team</button>
+              </div>
+              <div class="team-gauge-wrap">
+                <svg id="teamGauge" viewBox="0 0 220 120" aria-label="Team progress gauge"></svg>
+                <div class="team-score-center">
+                  <strong>78%</strong>
+                  <span>Overall Team Progress</span>
+                </div>
+              </div>
+              <div class="team-up">↑ 8% This Month</div>
+              <div class="team-table">
+                <div class="team-row team-head">
+                  <span>Members</span>
+                  <span>Percent</span>
+                  <span>Status</span>
+                </div>
+                <div class="team-row">
+                  <span class="member-name"><span class="avatar-mini">S</span> Sarah Lee</span>
+                  <span>92%</span>
+                  <span class="status on-track">On Track</span>
+                </div>
+                <div class="team-row">
+                  <span class="member-name"><span class="avatar-mini alt">M</span> Michael Chen</span>
+                  <span>84%</span>
+                  <span class="status on-track">On Track</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="page" data-page="leaderboard">
+          <div class="leaderboard-shell">
+            <div class="leaderboard-header-row">
+              <div class="title-wrap">
+                <h2>Friends leaderboard</h2>
+                <span class="live-pill"><span class="live-dot"></span> Live</span>
+              </div>
+              <div class="leaderboard-pills">
+                <span class="info-pill" id="leaderboardFriendCount">4 friends</span>
+                <span class="info-pill" id="leaderboardCurrentRank">Your rank</span>
+                <span class="info-pill orange" id="leaderboardCurrentScore">0 XP</span>
+              </div>
+            </div>
+
+            <div class="podium" id="podium"></div>
+
+            <div class="leaderboard-table-panel">
+              <table class="leaderboard-table">
+                <thead>
+                  <tr>
+                    <th>Place</th>
+                    <th>User</th>
+                    <th>Last Activity</th>
+                    <th>Points</th>
+                  </tr>
+                </thead>
+                <tbody id="leaderboardTableBody"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="floating-filters" id="leaderboardPeriods" role="group" aria-label="Leaderboard time period">
+            <button class="filter-chip" data-period="daily" type="button">Today</button>
+            <button class="filter-chip active" data-period="weekly" type="button" aria-pressed="true">This week</button>
+            <button class="filter-chip" data-period="allTime" type="button">All time</button>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <div id="projectModal" class="modal hidden" aria-hidden="true">
+      <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="projectModalTitle">
+        <h3 id="projectModalTitle">New Project</h3>
+        <form id="projectForm" class="project-form">
+          <label>
+            <span>Project name</span>
+            <input id="projectNameInput" type="text" placeholder="Launch sprint" required />
+          </label>
+          <label>
+            <span>Colour</span>
+            <input id="projectColorInput" type="color" value="#7c6ff2" />
+          </label>
+          <div class="project-form-actions">
+            <button type="button" class="secondary-action" id="closeProjectModal">Cancel</button>
+            <button type="submit" class="primary-btn">Create</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
